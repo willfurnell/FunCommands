@@ -1,0 +1,45 @@
+name: FunCommands
+main: com.willfurnell.FunCommands.Main
+version: 0.1
+commands:
+    ragequit:
+      description: Ragequit from the server.
+      usage: /<command>
+    troll:
+      description: Sends a trolling notice.
+      usage: /<command>
+    funcommands:
+      description: Bring up usage info.
+      usage: /<command>
+    funcommands help:
+      description: FunCommands help.
+      usage: /<command>
+    funcommands credits:
+      description: FunCommands credits.
+      usage: /<command>
+    funcommands list:
+      description: FunCommands list.
+      usage: /<command>
+    suicide:
+      description: Kills the player using the command.
+      usage: /<command>
+    
+permissions:
+    funcommands.*:
+        description: Gives access to all FunCommands commands.
+        children:
+            funcommands.ragequit: true
+            funcommands.troll: true
+            funcommands.fc: true
+            funcommands.suicide: true
+    funcommands.ragequit:
+        description: Allows use of ragequit.
+    funcommands.troll:
+        description: Allows use of troll.
+    funcommands.fc:
+        description: Basic use of help, list commands etc...
+    funcommands.suicide:
+        description: Allows the player to commit suicide.
+    funcommands.rocket:
+        description: Allows a player to rocket another player.
+        default: op
