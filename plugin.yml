@@ -4,31 +4,39 @@ version: 0.2
 commands:
     ragequit:
       description: Ragequit from the server.
+      permission: funcommands.ragequit
       usage: /<command>
     troll:
       description: Sends a trolling notice.
+      permission: funcommands.troll
       usage: /<command>
     funcommands:
       description: Bring up usage info.
+      permission: funcommands.fc
       usage: /<command>
     funcommands help:
       description: FunCommands help.
+      permission: funcommands.fc
       usage: /<command>
     funcommands credits:
       description: FunCommands credits.
+      permission: funcommands.fc
       usage: /<command>
     funcommands list:
       description: FunCommands list.
+      permission: funcommands.fc
       usage: /<command>
     suicide:
       description: Kills the player using the command.
+      permission: funcommands.suicide
       usage: /<command>
     rocket:
       description: Rockets the player.
+      permission: funcommands.rocket
       usage: /<command>
-    
 permissions:
     funcommands.*:
+        default: op
         description: Gives access to all FunCommands commands.
         children:
             funcommands.ragequit: true
@@ -38,12 +46,16 @@ permissions:
             funcommands.rocket: true
     funcommands.ragequit:
         description: Allows use of ragequit.
+        default: true
     funcommands.troll:
         description: Allows use of troll.
+        default: true
     funcommands.fc:
         description: Basic use of help, list commands etc...
+        default: true
     funcommands.suicide:
         description: Allows the player to commit suicide.
+        default: true
     funcommands.rocket:
         description: Allows a player to rocket another player.
-        default: op
+        default: false

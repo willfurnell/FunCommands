@@ -23,6 +23,7 @@ import com.avaje.ebean.EbeanServer;
 
 public class Commands implements CommandExecutor, Plugin{
 
+	@SuppressWarnings("unused")
 	private Main plugin;
 	public Commands(Main plugin) {
 		this.plugin = plugin;

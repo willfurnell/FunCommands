@@ -36,7 +36,7 @@ public final class Main extends JavaPlugin{
 		}
     	String version = "0.2";
     	if (!version.equals(line)) {
-    		getLogger().info("An update to FunCommands is available! You are running version 0.1, whereas the latest version is " + line);
+    		getLogger().info("An update to FunCommands is available! You are running version 0.2, whereas the latest version is " + line);
     	} else {
     		getLogger().info("FunCommands is up to date");
     	}
