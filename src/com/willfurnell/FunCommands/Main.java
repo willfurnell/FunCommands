@@ -9,11 +9,10 @@ import java.net.URL;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class Main extends JavaPlugin{
-
-	/*
+	
 	public void versionCheck() {
 		// Our plugin version! This is /very/ important.
-		String curVer = "0.1";
+		
     	URL url = null;
 		try {
 			url = new URL("http://www.willfurnell.com/intranet/bukkit/fc.ver");
@@ -35,18 +34,25 @@ public final class Main extends JavaPlugin{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-    	if (!(line == curVer)) {
-    		getLogger().info("An update to FunCommands is avaliable! You are running version " + curVer + ", whereas the latest version is " + line);
+    	String version = "0.2";
+    	if (!version.equals(line)) {
+    		getLogger().info("An update to FunCommands is available! You are running version 0.1, whereas the latest version is " + line);
     	} else {
-    	getLogger().info("FunCommands is up to date");
+    		getLogger().info("FunCommands is up to date");
     	}
     	
 	}
-	*/
+	
 	
     @Override
     public void onEnable() {
+    	versionCheck();
     	getLogger().info("FunCommands by willfurnell enabled.");
+    	setupCommands();
+    	
+    }
+    
+    public void setupCommands() {
     	getCommand("ragequit").setExecutor(new Commands(this));
     	getCommand("troll").setExecutor(new Commands(this));
     	getCommand("funcommands").setExecutor(new Commands(this));

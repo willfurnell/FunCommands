@@ -6,12 +6,14 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.plugin.Plugin;
 import org.bukkit.util.Vector;
 
-public class Commands implements CommandExecutor{
-	
- 
+public class Commands implements CommandExecutor, Plugin{
+
+	private Main plugin;
 	public Commands(Main plugin) {
+		this.plugin = plugin;
 	}
 	
 	@Override
@@ -33,7 +35,7 @@ public class Commands implements CommandExecutor{
 							 player.sendMessage(ChatColor.YELLOW + "--- FunCommands Credits ---\nVersion 0.1 (23/12/12)\nBuilt by Will Furnell\nwww.willfurnell.com");
 						 }
 						 if (args[0].equalsIgnoreCase("list")) {
-							 player.sendMessage(ChatColor.YELLOW + "--- FunCommands List ---\n/troll - You're trolling, right?\n/ragequit - Ragequit from the server\n/suicide - Commit suicide");
+							 player.sendMessage(ChatColor.YELLOW + "--- FunCommands List ---\n/troll - You're trolling, right?\n/ragequit - Ragequit from the server\n/suicide - Commit suicide\n/rocket <player> - Send a specified player into the air.");
 						 }
 					} else {
 						player.sendMessage(ChatColor.GRAY +"Type '/funcommands help' for help.");
@@ -96,24 +98,32 @@ public class Commands implements CommandExecutor{
 		
 		// /rocket <player>
 		if(cmd.getName().equalsIgnoreCase("rocket")){ 
-				//We have a few arguments in this one: help credits list
 				//Check if its a player
+			if (sender instanceof Player) {
 				final Player player = (Player) sender;
 				if (args.length == 1) {
 					
 					String argTarg = args[0];
-					Player target = Bukkit.getServer().getPlayer(argTarg);
+					final Player target = Bukkit.getServer().getPlayer(argTarg);
 					
 					if (target == null) {
 					    sender.sendMessage(ChatColor.RED + "Player doesn't exist!");
 					    return true;
 					} else {
 					
-						float explosionPower = 4F;
-						target.setVelocity(new Vector(0, 20, 0));
-					    target.getWorld().createExplosion(target.getLocation(), explosionPower);
-					    target.setHealth(0);
-					    return true;
+						final float explosionPower = 4F;
+						target.setVelocity(new Vector(0, 10, 0));
+
+			            Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(this, new Runnable() {
+			                @Override
+			                public void run() {
+							    target.getWorld().createExplosion(target.getLocation(), explosionPower);
+								target.setHealth(0);
+			                }
+			            }, 40L);
+			            
+			            
+						return true;
 					
 					}
 				
@@ -121,6 +131,12 @@ public class Commands implements CommandExecutor{
 					player.sendMessage(ChatColor.GRAY +"You need to specify a player!");
 					return true;
 				}
+				
+			} else {
+				sender.sendMessage("You must be a player!");
+				return true;
+			}
+			
 		} 
 		//END COMMANDS//
 		

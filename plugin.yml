@@ -1,6 +1,6 @@
 name: FunCommands
 main: com.willfurnell.FunCommands.Main
-version: 0.1
+version: 0.2
 commands:
     ragequit:
       description: Ragequit from the server.
@@ -22,6 +22,9 @@ commands:
       usage: /<command>
     suicide:
       description: Kills the player using the command.
+      usage: /<command>
+    rocket:
+      description: Rockets the player.
       usage: /<command>
     
 permissions:
