@@ -35,6 +35,7 @@ permissions:
             funcommands.troll: true
             funcommands.fc: true
             funcommands.suicide: true
+            funcommands.rocket: true
     funcommands.ragequit:
         description: Allows use of ragequit.
     funcommands.troll:

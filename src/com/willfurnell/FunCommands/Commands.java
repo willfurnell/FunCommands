@@ -22,11 +22,13 @@ public class Commands implements CommandExecutor, Plugin{
 		//START COMMANDS
 		
 		// /funcommands
-		if(cmd.getName().equalsIgnoreCase("funcommands")){ 
+		if(cmd.getName().equalsIgnoreCase("funcommands")){
+			final Player player = (Player) sender;
+			if (player.hasPermission("funcommands.fc")) {
 				//We have a few arguments in this one: help credits list
 				//Check if its a player
 				if (sender instanceof Player) {
-					final Player player = (Player) sender;
+
 					if (args.length == 1) {
 						 if (args[0].equalsIgnoreCase("help")) {
 							 player.sendMessage(ChatColor.YELLOW + "--- FunCommands Help ---\nFunCommands is a simple plugin that facilitates, you guessed it, fun commands.\n" + ChatColor.GREEN + "Commands:\n" + ChatColor.YELLOW + "/funcommands help\n/funcommands credits\n/funcommands list");
@@ -46,14 +48,18 @@ public class Commands implements CommandExecutor, Plugin{
 			       sender.sendMessage("You must be a player!");
 		           return true;
 		        }
+			} else {
+				sender.sendMessage(ChatColor.YELLOW + "[FC]" + ChatColor.RED + " You don't have permission to use this command!");
+			}
 		} 
 		
 		// /ragequit
 		if(cmd.getName().equalsIgnoreCase("ragequit")){ 
+			final Player player = (Player) sender;
+			if (player.hasPermission("funcommands.ragequit")) {
 				// If the player typed /ragequit then do the following..
 				//Check if its a player
 				if (sender instanceof Player) {
-					final Player player = (Player) sender;
 		            Bukkit.getServer().broadcastMessage(ChatColor.RED + sender.getName() + " has ragequit.");
 		            //Kick the player too!
 		            player.kickPlayer("You have ragequitted from the server!");
@@ -63,14 +69,18 @@ public class Commands implements CommandExecutor, Plugin{
 		           sender.sendMessage("You must be a player!");
 		           return true;
 		        }
+			} else {
+				sender.sendMessage(ChatColor.YELLOW + "[FC]" + ChatColor.RED + " You don't have permission to use this command!");
+			}
 		} 
 		
 		// /suicide
-		if(cmd.getName().equalsIgnoreCase("suicide")){ 
+		if(cmd.getName().equalsIgnoreCase("suicide")){
+			final Player player = (Player) sender;
+			if (player.hasPermission("funcommands.suicide")) {
 				// If the player typed /suicide then do the following..
 				//Check if its a player
 				if (sender instanceof Player) {
-					final Player player = (Player) sender;
 		            Bukkit.getServer().broadcastMessage(ChatColor.RED + sender.getName() + " killed themselves...");
 		            //Now to kill them...
 		            player.setHealth(0);
@@ -80,10 +90,15 @@ public class Commands implements CommandExecutor, Plugin{
 		           sender.sendMessage("You must be a player! Why would you wan't to kill the server anyway?!");
 		           return true;
 		        }
+			} else {
+				sender.sendMessage(ChatColor.YELLOW + "[FC]" + ChatColor.RED + " You don't have permission to use this command!");
+			}
 		} 
 		
 		// /troll
 		if(cmd.getName().equalsIgnoreCase("troll")){ 
+			final Player player = (Player) sender;
+			if (player.hasPermission("funcommands.troll")) {
 				// If the player typed /troll then do the following..
 				//Check if its a player
 				if (sender instanceof Player) {
@@ -94,47 +109,47 @@ public class Commands implements CommandExecutor, Plugin{
 		        	Bukkit.getServer().broadcastMessage(ChatColor.GRAY + "The server is trolling you!");
 		           return true;
 		        }
+			} else {
+				sender.sendMessage(ChatColor.YELLOW + "[FC]" + ChatColor.RED + " You don't have permission to use this command!");
+			}
 		} 
 		
 		// /rocket <player>
-		if(cmd.getName().equalsIgnoreCase("rocket")){ 
+		if(cmd.getName().equalsIgnoreCase("rocket")){
+			final Player player = (Player) sender;
+			if (player.hasPermission("funcommands.troll")) {
 				//Check if its a player
-			if (sender instanceof Player) {
-				final Player player = (Player) sender;
-				if (args.length == 1) {
+				if (sender instanceof Player) {
+					if (args.length == 1) {
+						String argTarg = args[0];
+						final Player target = Bukkit.getServer().getPlayer(argTarg);
+						if (target == null) {
+					    	sender.sendMessage(ChatColor.RED + "Player doesn't exist!");
+					    	return true;
+						} else {
 					
-					String argTarg = args[0];
-					final Player target = Bukkit.getServer().getPlayer(argTarg);
-					
-					if (target == null) {
-					    sender.sendMessage(ChatColor.RED + "Player doesn't exist!");
-					    return true;
+							final float explosionPower = 4F;
+							target.setVelocity(new Vector(0, 10, 0));
+			            	Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(this, new Runnable() {
+			                	@Override
+			                	public void run() {
+							    	target.getWorld().createExplosion(target.getLocation(), explosionPower);
+									target.setHealth(0);
+			                	}
+			            	}, 40L);
+							return true;
+						}
 					} else {
-					
-						final float explosionPower = 4F;
-						target.setVelocity(new Vector(0, 10, 0));
-
-			            Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(this, new Runnable() {
-			                @Override
-			                public void run() {
-							    target.getWorld().createExplosion(target.getLocation(), explosionPower);
-								target.setHealth(0);
-			                }
-			            }, 40L);
-			            
-			            
+						player.sendMessage(ChatColor.GRAY +"You need to specify a player!");
 						return true;
-					
 					}
 				
 				} else {
-					player.sendMessage(ChatColor.GRAY +"You need to specify a player!");
+					sender.sendMessage("You must be a player!");
 					return true;
 				}
-				
 			} else {
-				sender.sendMessage("You must be a player!");
-				return true;
+				sender.sendMessage(ChatColor.YELLOW + "[FC]" + ChatColor.RED + " You don't have permission to use this command!");
 			}
 			
 		} 
