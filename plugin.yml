@@ -46,16 +46,16 @@ permissions:
             funcommands.rocket: true
     funcommands.ragequit:
         description: Allows use of ragequit.
-        default: true
+        default: false
     funcommands.troll:
         description: Allows use of troll.
-        default: true
+        default: false
     funcommands.fc:
         description: Basic use of help, list commands etc...
         default: true
     funcommands.suicide:
         description: Allows the player to commit suicide.
-        default: true
+        default: false
     funcommands.rocket:
         description: Allows a player to rocket another player.
         default: false

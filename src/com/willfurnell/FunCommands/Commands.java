@@ -40,7 +40,7 @@ public class Commands implements CommandExecutor, Plugin{
 				//Check if its a player
 				if (sender instanceof Player) {
 					final Player player = (Player) sender;
-					if (player.hasPermission("funcommands.fc")) {
+					if (sender.hasPermission("funcommands.fc")) {
 
 					if (args.length == 1) {
 						 if (args[0].equalsIgnoreCase("help")) {
@@ -73,7 +73,7 @@ public class Commands implements CommandExecutor, Plugin{
 				//Check if its a player
 				if (sender instanceof Player) {
 					final Player player = (Player) sender;
-					if (player.hasPermission("funcommands.ragequit")) {
+					if (sender.hasPermission("funcommands.ragequit")) {
 		            Bukkit.getServer().broadcastMessage(ChatColor.RED + sender.getName() + " has ragequit.");
 		            //Kick the player too!
 		            player.kickPlayer("You have ragequitted from the server!");
@@ -95,7 +95,7 @@ public class Commands implements CommandExecutor, Plugin{
 				//Check if its a player
 				if (sender instanceof Player) {
 					final Player player = (Player) sender;
-					if (player.hasPermission("funcommands.suicide")) {
+					if (sender.hasPermission("funcommands.suicide")) {
 		            Bukkit.getServer().broadcastMessage(ChatColor.RED + sender.getName() + " killed themselves...");
 		            //Now to kill them...
 		            player.setHealth(0);
@@ -117,8 +117,8 @@ public class Commands implements CommandExecutor, Plugin{
 				//Check if its a player
 				if (sender instanceof Player) {
 					final Player player = (Player) sender;
-					if (player.hasPermission("funcommands.troll")) {
-		            Bukkit.getServer().broadcastMessage(ChatColor.GRAY + sender.getName() + " is a troll!\n /trolling");
+					if (sender.hasPermission("funcommands.troll")) {
+		            Bukkit.getServer().broadcastMessage(ChatColor.GRAY + sender.getName() + " is a troll!\n");
 		            return true;
 					} else {
 						sender.sendMessage(ChatColor.YELLOW + "[FC]" + ChatColor.RED + " You don't have permission to use this command!");
@@ -137,7 +137,7 @@ public class Commands implements CommandExecutor, Plugin{
 			final Player player = (Player) sender;
 				//Check if its a player
 				if (sender instanceof Player) {
-					if (player.hasPermission("funcommands.rocket")) {
+					if (sender.hasPermission("funcommands.rocket")) {
 						if (args.length == 1) {
 							final String argTarg = args[0];
 							final Player target = Bukkit.getServer().getPlayer(argTarg);
